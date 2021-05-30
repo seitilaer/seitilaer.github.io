@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en-us" lang="en-us" >
+
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.54.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Exponential &middot; Roychosia</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script src="/js/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "neutral",
+      fontFamily: 'Times New Roman',
+      curve: 'cardinal',
+    });
+  </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+      integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+      crossorigin="anonymous"
+    />
+
+    
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+      integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+      crossorigin="anonymous"
+    ></script>
+
+    
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+      integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
+  
+  
+</head>
+  <body class="theme-base-09 ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/">
+        <h1>Roychosia</h1>
+      </a>
+      <p class="lead">
+        
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    
+  </div>
+</aside>
+    <main class="content container">
+    <div class="post">
+  <h1>Exponential</h1>
+  <time datetime=2020-08-19T23:12:02&#43;0800 class="post-date">Wed, Aug 19, 2020</time>
+  <p>假设你有 1 元，24 秒会加倍成 2 元:</p>
+
+<ul>
+<li>0 秒-&gt;<code>1</code></li>
+<li>&hellip;</li>
+<li>12 秒-&gt;<code>1</code>+0.5</li>
+<li>&hellip;</li>
+<li>24 秒-&gt;<code>1+0.5</code>+0.5-&gt;2</li>
+</ul>
+
+<p>如果 12 秒的 <code>0.5</code> 也能在后续的 12 秒内带来收益，也就是粒度是 12 秒:</p>
+
+<ul>
+<li>0 秒-&gt;<code>1</code></li>
+<li>&hellip;</li>
+<li>12 秒-&gt;<code>1</code>+0.5</li>
+<li>&hellip;</li>
+<li>24 秒-&gt;<code>1+0.5</code>+0.5+0.25-&gt;2.25</li>
+</ul>
+
+<p>接着细分粒度到 6 秒:</p>
+
+<ul>
+<li>0 秒-&gt;<code>1</code></li>
+<li>&hellip;</li>
+<li>6 秒-&gt;<code>1</code>+0.25-&gt;$$(1+\frac 1 4)^{1}$$</li>
+<li>&hellip;</li>
+<li>12 秒-&gt;<code>1+0.25</code>+0.25+0.0625-&gt;$$(1+\frac 1 4)^{2}$$</li>
+<li>&hellip;</li>
+<li>18 秒-&gt;<code>1+0.25+0.25+0.0625</code>+0.25+0.0625+0.0625+0.015625-&gt;$$(1+\frac 1 4)^{3}$$</li>
+<li>&hellip;</li>
+<li>24 秒-&gt;2.44140625-&gt;$$(1+\frac 1 4)^{4}$$</li>
+</ul>
+
+<p>v 越大，越细分， 数字会越接近自然常数 <code>e=2.718281828459...</code></p>
+
+<p>$$(1+\frac 1 v)^{v}$$</p>
+
+<hr />
+
+<ul>
+<li><a href="https://betterexplained.com/articles/an-intuitive-guide-to-exponential-functions-e/">https://betterexplained.com/articles/an-intuitive-guide-to-exponential-functions-e/</a></li>
+</ul>
+
+</div>
+
+
+    </main>
+
+    
+  </body>
+</html>

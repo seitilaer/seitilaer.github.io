@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Roychosia</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Roychosia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 May 2021 19:03:03 +0800</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx 301</title>
+      <link>/post/nginx/</link>
+      <pubDate>Fri, 28 May 2021 19:03:03 +0800</pubDate>
+      
+      <guid>/post/nginx/</guid>
+      <description>在 http://v.com/#/apps 跑 js
+window.location.href = &#39;/v&#39;  页面跳转到 http://v.com:8080/v/
+由于 v 的末尾没有 /，nginx 会查找有没有 v 文件，有的话就返回，但 v 是文件夹，所以 nginx 会在末尾添加 /，然后是 301 跳转，Location-&amp;gt;http://v.com:8080/v/
+浏览器地址的 port 是 80，8080 是 nginx 的 server listen port，我们希望的 Location 是 http://v.com/v/
+找到的方案  把浏览器地址的 port 和 nginx 的 port 保持一致
+ absolute_redirect off;
+off 就是 nginx 给出的 redirects 是非 absolute，是 relative，也就是不带 ip、port，那 Location 是 /v/，就会跳转到 http://v.com/v/
+ port_in_redirect off;
+off 就是不带 port，那 Location 是 http://v.</description>
+    </item>
+    
+    <item>
+      <title>各种</title>
+      <link>/post/items/</link>
+      <pubDate>Fri, 14 May 2021 20:08:00 +0800</pubDate>
+      
+      <guid>/post/items/</guid>
+      <description>Chrome Extensions Markdown Viewer
+Stylus
+App Snipaste</description>
+    </item>
+    
+    <item>
+      <title>20210502</title>
+      <link>/post/20210502/</link>
+      <pubDate>Sun, 02 May 2021 22:57:10 +0800</pubDate>
+      
+      <guid>/post/20210502/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ML</title>
+      <link>/post/ml/</link>
+      <pubDate>Thu, 27 Aug 2020 13:29:45 +0800</pubDate>
+      
+      <guid>/post/ml/</guid>
+      <description>南瓜书-&amp;gt;https://datawhalechina.github.io/pumpkin-book/#/
+linear regression model $$y=w^Tx+b$$
+w、b 是参数，不同的参数-&amp;gt;不同的函数</description>
+    </item>
+    
+    <item>
+      <title>Exponential</title>
+      <link>/post/exponential/</link>
+      <pubDate>Wed, 19 Aug 2020 23:12:02 +0800</pubDate>
+      
+      <guid>/post/exponential/</guid>
+      <description>假设你有 1 元，24 秒会加倍成 2 元:
+ 0 秒-&amp;gt;1 &amp;hellip; 12 秒-&amp;gt;1+0.5 &amp;hellip; 24 秒-&amp;gt;1+0.5+0.5-&amp;gt;2  如果 12 秒的 0.5 也能在后续的 12 秒内带来收益，也就是粒度是 12 秒:
+ 0 秒-&amp;gt;1 &amp;hellip; 12 秒-&amp;gt;1+0.5 &amp;hellip; 24 秒-&amp;gt;1+0.5+0.5+0.25-&amp;gt;2.25  接着细分粒度到 6 秒:
+ 0 秒-&amp;gt;1 &amp;hellip; 6 秒-&amp;gt;1+0.25-&amp;gt;$$(1+\frac 1 4)^{1}$$ &amp;hellip; 12 秒-&amp;gt;1+0.25+0.25+0.0625-&amp;gt;$$(1+\frac 1 4)^{2}$$ &amp;hellip; 18 秒-&amp;gt;1+0.25+0.25+0.0625+0.25+0.0625+0.0625+0.015625-&amp;gt;$$(1+\frac 1 4)^{3}$$ &amp;hellip; 24 秒-&amp;gt;2.44140625-&amp;gt;$$(1+\frac 1 4)^{4}$$  v 越大，越细分， 数字会越接近自然常数 e=2.718281828459...
+$$(1+\frac 1 v)^{v}$$
+ https://betterexplained.</description>
+    </item>
+    
+    <item>
+      <title>Why utf-8 has no endianness issues?</title>
+      <link>/post/utf-8/</link>
+      <pubDate>Tue, 30 Jun 2020 22:46:00 +0800</pubDate>
+      
+      <guid>/post/utf-8/</guid>
+      <description>And why utf-16 has endianness issues?
+echo &#39;abc&#39; &amp;gt; file hexdump file  将字符串 abc 写入 file 文件，使用 hexdump 去读取该文件的十六进制编码如下:
+0000000 61 62 63 0a 0000004   0000000 -&amp;gt; 该行到文件起始处的偏移量(offset)
+ 61 62 63 -&amp;gt; abc
+ 0a -&amp;gt; line feed character
+ 0000004 -&amp;gt; 文件的字节大小
+  utf-8 abc(utf-8 without bom)-&amp;gt;0000000 61 62 63 0a 0000004
+abc(utf-8 with bom)-&amp;gt;0000000 ef bb bf 61 62 63 0a 0000007</description>
+    </item>
+    
+  </channel>
+</rss>

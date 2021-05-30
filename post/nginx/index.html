@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en-us" lang="en-us" >
+
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.54.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nginx 301 &middot; Roychosia</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <script src="/js/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "neutral",
+      fontFamily: 'Times New Roman',
+      curve: 'cardinal',
+    });
+  </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+      integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+      crossorigin="anonymous"
+    />
+
+    
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+      integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+      crossorigin="anonymous"
+    ></script>
+
+    
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+      integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
+  
+  
+</head>
+  <body class="theme-base-09 ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/">
+        <h1>Roychosia</h1>
+      </a>
+      <p class="lead">
+        
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    
+  </div>
+</aside>
+    <main class="content container">
+    <div class="post">
+  <h1>Nginx 301</h1>
+  <time datetime=2021-05-28T19:03:03&#43;0800 class="post-date">Fri, May 28, 2021</time>
+  
+
+<p>在 <a href="http://v.com/#/apps">http://v.com/#/apps</a> 跑 js</p>
+
+<pre><code class="language-js">window.location.href = '/v'
+</code></pre>
+
+<p>页面跳转到 <a href="http://v.com:8080/v/">http://v.com:8080/v/</a></p>
+
+<p>由于 v 的末尾没有 <code>/</code>，nginx 会查找有没有 v 文件，有的话就返回，但 v 是文件夹，所以 nginx 会在末尾添加 <code>/</code>，然后是 301 跳转，Location-&gt;<code>http://v.com:8080/v/</code></p>
+
+<p>浏览器地址的 port 是 80，8080 是 nginx 的 server listen port，我们希望的 Location 是 <code>http://v.com/v/</code></p>
+
+<h1 id="找到的方案">找到的方案</h1>
+
+<ul>
+<li><p>把浏览器地址的 port 和 nginx 的 port 保持一致</p></li>
+
+<li><p><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#absolute_redirect">absolute_redirect off;</a></p>
+
+<p>off 就是 nginx 给出的 redirects 是非 absolute，是 relative，也就是不带 ip、port，那 Location 是 <code>/v/</code>，就会跳转到 <code>http://v.com/v/</code></p></li>
+
+<li><p><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#port_in_redirect">port_in_redirect off;</a></p>
+
+<p>off 就是不带 port，那 Location 是 <code>http://v.com/v/</code>，目前的页面也会正常，但如果目前页面的 port 不是 80，那就不会有效</p></li>
+
+<li><p>全都 rewrite</p>
+
+<pre><code>location / {
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+    if (-d $request_filename) {
+        rewrite [^/]$ $scheme://$http_host$uri/ permanent;
+    }
+}
+</code></pre></li>
+</ul>
+
+</div>
+
+
+    </main>
+
+    
+  </body>
+</html>
